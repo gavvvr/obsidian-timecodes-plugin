@@ -89,6 +89,9 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['out/*'],
+    ignores: [
+      'out/*',
+      'e2e/.e2e_test_vault/*',
+    ],
   },
 )
