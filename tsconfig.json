@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES6",
+    "noImplicitAny": true,
+    "isolatedModules": true,
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictNullChecks": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES5",
+      "ES6",
+      "ES7"
+    ],
+  },
+  "include": [
+    "**/*.ts"
+  ],
+}

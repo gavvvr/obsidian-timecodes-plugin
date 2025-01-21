@@ -1,0 +1,25 @@
+{
+  "name": "obsidian-timecodes-plugin",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "build": "tsc -noEmit -skipLibCheck && node scripts/esbuild.build.js production"
+  },
+  "keywords": [
+    "obsidian.md",
+    "youtube",
+    "timecodes"
+  ],
+  "author": "Kirill Gavrilov",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "22.10.7",
+    "enquirer": "2.4.1",
+    "esbuild": "0.24.2",
+    "obsidian": "1.7.2",
+    "obsidian-utils": "0.10.2",
+    "typescript": "5.7.3"
+  },
+  "packageManager": "pnpm@9.15.4"
+}
