@@ -16,6 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "9.18.0",
+    "@stylistic/eslint-plugin": "2.13.0",
     "@types/node": "22.10.7",
     "enquirer": "2.4.1",
     "esbuild": "0.24.2",
