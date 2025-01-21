@@ -32,3 +32,20 @@ jobs:
         with:
           name: lcov.info
           path: out/coverage/lcov.info
+
+  SonarScan:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Download coverage data
+        uses: actions/download-artifact@v4
+        with:
+          name: lcov.info
+          path: coverage/
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
