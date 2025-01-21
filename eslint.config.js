@@ -3,6 +3,7 @@
 import eslint from '@eslint/js'
 import stylistic from '@stylistic/eslint-plugin'
 import perfectionist from 'eslint-plugin-perfectionist'
+import * as wdio from 'eslint-plugin-wdio'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
@@ -78,6 +79,13 @@ export default tseslint.config(
       ecmaVersion: 'latest',
       globals: { ...globals.node },
       sourceType: 'module',
+    },
+  },
+  {
+    files: ['e2e/**/*.ts'],
+    extends: [wdio.configs['flat/recommended']],
+    rules: {
+      '@typescript-eslint/no-non-null-assertion': 'off',
     },
   },
   {
