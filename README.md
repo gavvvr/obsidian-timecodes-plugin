@@ -5,7 +5,7 @@
 [![tested with webdriver.io](https://img.shields.io/badge/tested%20with-webdriver.io-%23ea5906)](https://webdriver.io/)
 
 
-[installation-instructions]: https://help.obsidian.md/Advanced+topics/Third-party+plugins#Discover+and+install+community+plugins
+[installation-instructions]: https://help.obsidian.md/Extending+Obsidian/Community+plugins#Install+a+community+plugin
 
 Turns raw timecodes (`MM:SS`/`HH:MM:SS`) into clickable links in Obsidian reading mode.
 
