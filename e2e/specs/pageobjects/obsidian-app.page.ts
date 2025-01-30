@@ -35,11 +35,11 @@ class ObsidianApp {
   }
 
   private async activatePlugin(pluginId: string) {
-    await browser.execute((imgurPluginId: string) => {
+    await browser.execute((timecodesPluginId: string) => {
       // @ts-expect-error 'app' exists in Obsidian
       declare const app: App
       app.plugins.setEnable(true)
-      app.plugins.enablePlugin(imgurPluginId)
+      app.plugins.enablePlugin(timecodesPluginId)
     }, pluginId)
   }
 
