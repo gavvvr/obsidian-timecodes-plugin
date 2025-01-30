@@ -23,7 +23,6 @@ class ObsidianApp {
     await fs.copyFile('../out/main.js', `${targetPluginsDir}/main.js`)
 
     await this.switchToMainWindow()
-    await $('button=Trust author and enable plugins').click()
     await this.closeModal('Trust vault modal')
   }
 
