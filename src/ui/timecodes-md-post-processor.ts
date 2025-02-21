@@ -79,7 +79,6 @@ const createTextFragmentEnrichedWithLinks
   let lastIndex = 0
   let match: { index: number, fullMatch: string, timecode: Timecode } | null
   const matcher = timeCodeMatcher(rawTextContent)
-  console.log('Raw text input', rawTextContent)
 
   while ((match = matcher.next()) !== null) {
     const fullMatch = match.fullMatch
