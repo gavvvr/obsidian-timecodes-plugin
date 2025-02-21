@@ -22,6 +22,13 @@ export default tseslint.config(
     quoteProps: 'as-needed',
   }),
   {
+    // Apply `no-console` only to files inside `specific-directory/`
+    files: ['src/**/*'],
+    rules: {
+      'no-console': ['error', { allow: ['warn', 'error'] }],
+    },
+  },
+  {
     rules: {
       '@stylistic/curly-newline': ['error', { consistent: true }],
       '@stylistic/max-len': ['error', { code: 100, ignoreUrls: true, ignoreComments: true }],
