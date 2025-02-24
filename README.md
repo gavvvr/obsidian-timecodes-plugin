@@ -1,4 +1,4 @@
-# Obsidian Timecodes Plugin
+# Timecodes Plugin for Obsidian
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=gavvvr_obsidian-timecodes-plugin&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=gavvvr_obsidian-timecodes-plugin)
 [![Installations count](https://img.shields.io/github/downloads/gavvvr/obsidian-timecodes-plugin/main.js.svg)][installation-instructions]
