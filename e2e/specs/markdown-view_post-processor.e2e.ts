@@ -173,10 +173,9 @@ https://www.youtube.com/watch?v=k_ItB5btREU
       // eslint-disable-next-line wdio/no-pause
       await browser.pause(100)
 
-      // eslint-disable-next-line @typescript-eslint/await-thenable, @typescript-eslint/no-base-to-string
-      const textFromAllNoteParagraphs = await $$('.markdown-preview-section p:not(.mod-ui)')
+      const textLinesFromAllNoteParagraphs = $$('.markdown-preview-section p:not(.mod-ui)')
         .map(p => p.getText())
-        .join('\n\n')
+      const textFromAllNoteParagraphs = (await textLinesFromAllNoteParagraphs).join('\n\n')
       await expect(textFromAllNoteParagraphs).toBe(noteContent)
     })
   })
