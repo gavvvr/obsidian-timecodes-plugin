@@ -4,7 +4,7 @@ import { Timecode } from '../types'
 import { TIMECODE_REGEXP, matchesIterator as timeCodeMatcher } from '../utils/timecode-parser'
 import { createTimecodedYouTubeLink, findYouTubeVideoId } from '../utils/youtube-links'
 
-let latestDetectedVideoId: string | null = null
+let latestRequiredEnricher: TextTimecodeEnricher | null = null
 let latestNoteBeingProcessed: string | null = null
 
 export function turnRawTimecodesIntoClickableLinks(
@@ -14,7 +14,7 @@ export function turnRawTimecodesIntoClickableLinks(
   const currentNoteSourcePath = ctx.sourcePath
 
   if (latestNoteBeingProcessed !== null && latestNoteBeingProcessed !== currentNoteSourcePath) {
-    latestDetectedVideoId = null
+    latestRequiredEnricher = null
   }
   latestNoteBeingProcessed = currentNoteSourcePath
 
@@ -41,7 +41,7 @@ export function turnRawTimecodesIntoClickableLinks(
       const detectedVideoId = findYouTubeVideoId(textForFindingVideoLink)
 
       if (detectedVideoId) {
-        latestDetectedVideoId = detectedVideoId
+        latestRequiredEnricher = youtubeEnricherFor(detectedVideoId)
       }
     }
 
@@ -51,60 +51,65 @@ export function turnRawTimecodesIntoClickableLinks(
       if (!nodeTextContent) continue
       const textNodeContainsTimecodes = TIMECODE_REGEXP.test(nodeTextContent)
 
-      if (textNodeContainsTimecodes) {
+      if (textNodeContainsTimecodes && latestRequiredEnricher !== null) {
         nodesWithTimecodes.push(textNode)
       }
     }
   }
 
-  if (!latestDetectedVideoId) return
+  if (latestRequiredEnricher === null) return
 
   for (const node of nodesWithTimecodes) {
-    enrichTextNodeWithClickableTimecodes(node, latestDetectedVideoId)
+    enrichTextNodeWithClickableTimecodes(node, latestRequiredEnricher)
   }
 }
 
-function enrichTextNodeWithClickableTimecodes(node: Text, videoId: string): void {
+function enrichTextNodeWithClickableTimecodes(node: Text, strategy: TextTimecodeEnricher): void {
   const textNode = node as ChildNode
   const textContent = textNode.textContent
   if (textContent === null) return
 
-  const textFragmentEnrichedWithLinks = createTextFragmentEnrichedWithLinks(textContent, videoId)
+  const textFragmentEnrichedWithLinks = createTextFragmentEnrichedWithLinks(textContent, strategy)
   textNode.replaceWith(textFragmentEnrichedWithLinks)
 }
 
 const createTextFragmentEnrichedWithLinks
-= (rawTextContent: string, videoId: string): DocumentFragment => {
-  const textFragmentEnrichedWithLinks = document.createDocumentFragment()
-  let lastIndex = 0
-  let match: { index: number, fullMatch: string, timecode: Timecode } | null
-  const matcher = timeCodeMatcher(rawTextContent)
+  = (rawTextContent: string, strategy: TextTimecodeEnricher): DocumentFragment => {
+    const textFragmentEnrichedWithLinks = document.createDocumentFragment()
+    let lastIndex = 0
+    let match: { index: number, fullMatch: string, timecode: Timecode } | null
+    const matcher = timeCodeMatcher(rawTextContent)
 
-  while ((match = matcher.next()) !== null) {
-    const fullMatch = match.fullMatch
+    while ((match = matcher.next()) !== null) {
+      const fullMatch = match.fullMatch
 
-    const theTextBefore = rawTextContent.slice(lastIndex, match.index)
-    textFragmentEnrichedWithLinks.appendChild(document.createTextNode(theTextBefore))
+      const theTextBefore = rawTextContent.slice(lastIndex, match.index)
+      textFragmentEnrichedWithLinks.appendChild(document.createTextNode(theTextBefore))
 
-    const timecodeLinkEl = composeYouTubeLinkElement(videoId, fullMatch, match.timecode)
-    textFragmentEnrichedWithLinks.appendChild(timecodeLinkEl)
+      const timecodeLinkEl = strategy.composeLinkElementWithTimecode(fullMatch, match.timecode)
+      textFragmentEnrichedWithLinks.appendChild(timecodeLinkEl)
 
-    lastIndex = match.index + fullMatch.length
+      lastIndex = match.index + fullMatch.length
+    }
+    const theTextAfter = rawTextContent.slice(lastIndex)
+    textFragmentEnrichedWithLinks.appendChild(document.createTextNode(theTextAfter))
+    return textFragmentEnrichedWithLinks
   }
-  const theTextAfter = rawTextContent.slice(lastIndex)
-  textFragmentEnrichedWithLinks.appendChild(document.createTextNode(theTextAfter))
-  return textFragmentEnrichedWithLinks
+
+interface TextTimecodeEnricher {
+  composeLinkElementWithTimecode: (raw: string, t: Timecode) => HTMLAnchorElement
 }
 
-const composeYouTubeLinkElement
-= (videoId: string, rawTimecodeText: string, timecode: Timecode): HTMLAnchorElement => {
-  const timecodedLink = createTimecodedYouTubeLink(videoId, timecode)
-  const link = document.createElement('a')
-  link.rel = 'noopener nofollow'
-  link.className = 'external-link'
-  link.href = timecodedLink
-  link.target = '_blank'
-  link.textContent = rawTimecodeText
-  link.ariaLabel = timecodedLink
-  return link
-}
+const youtubeEnricherFor = (videoId: string): TextTimecodeEnricher => ({
+  composeLinkElementWithTimecode: (rawTimecodeText, timecode) => {
+    const timecodedLink = createTimecodedYouTubeLink(videoId, timecode)
+    const link = document.createElement('a')
+    link.rel = 'noopener nofollow'
+    link.className = 'external-link'
+    link.href = timecodedLink
+    link.target = '_blank'
+    link.textContent = rawTimecodeText
+    link.ariaLabel = timecodedLink
+    return link
+  },
+})
