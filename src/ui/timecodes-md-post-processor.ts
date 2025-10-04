@@ -7,6 +7,11 @@ import { createTimecodedYouTubeLink, findYouTubeVideoId } from '../utils/youtube
 let latestRequiredEnricher: TextTimecodeEnricher | null = null
 let latestNoteBeingProcessed: string | null = null
 
+/*
+ * From my observations, MarkdownPostProcessor:
+ * - gets called once for each paragraph in a note
+ * - doesn't get called again on subsequent switch to view-mode unless there was a change in paragraph
+ */
 export function turnRawTimecodesIntoClickableLinks(
   root: HTMLElement,
   ctx: MarkdownPostProcessorContext,
