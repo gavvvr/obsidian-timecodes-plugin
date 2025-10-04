@@ -1,6 +1,7 @@
 import { MarkdownPostProcessorContext } from 'obsidian'
 
 import { Timecode } from '../types'
+import { timecodeToSeconds } from '../utils/timecode-converter'
 import { TIMECODE_REGEXP, matchesIterator as timeCodeMatcher } from '../utils/timecode-parser'
 import { createTimecodedYouTubeLink, findYouTubeVideoId } from '../utils/youtube-links'
 
@@ -35,6 +36,9 @@ export function turnRawTimecodesIntoClickableLinks(
       }
       if (elementNode instanceof HTMLIFrameElement) {
         textForFindingVideoLink = elementNode.src
+      }
+      if (elementNode instanceof HTMLMediaElement) {
+        latestRequiredEnricher = localMedicaEnricherFor(elementNode)
       }
     } else if (node.nodeType === Node.TEXT_NODE) {
       const textNode = node as Text
@@ -115,6 +119,20 @@ const youtubeEnricherFor = (videoId: string): TextTimecodeEnricher => ({
     link.target = '_blank'
     link.textContent = rawTimecodeText
     link.ariaLabel = timecodedLink
+    return link
+  },
+})
+
+const localMedicaEnricherFor = (media: HTMLMediaElement): TextTimecodeEnricher => ({
+  composeLinkElementWithTimecode: (raw, timecode) => {
+    const link = document.createElement('a')
+    link.href = '#'
+    link.textContent = raw
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      media.currentTime = timecodeToSeconds(timecode)
+      void media.play()
+    })
     return link
   },
 })
