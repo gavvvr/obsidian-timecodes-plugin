@@ -1,7 +1,7 @@
 {
   "id": "timecodes",
   "name": "Timecodes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "minAppVersion": "0.13.8",
   "description": "Converts raw text timecodes into clickable URLs if a note contains a link to a video",
   "author": "Kirill Gavrilov",
