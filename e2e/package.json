@@ -12,7 +12,7 @@
     "@wdio/local-runner": "9.20.0",
     "@wdio/mocha-framework": "9.20.0",
     "@wdio/spec-reporter": "9.20.0",
-    "electron": "32.2.5",
+    "electron": "37.6.0",
     "expect-webdriverio": "5.4.3",
     "obsidian": "1.10.0",
     "wdio-electron-service": "8.1.0",
