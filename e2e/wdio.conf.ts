@@ -12,7 +12,6 @@ export const config: WebdriverIO.Config = {
   capabilities: [
     {
       browserName: 'electron',
-      browserVersion: '37.6.0',
       'wdio:electronServiceOptions': {
         // custom application args
         appBinaryPath: '/Applications/Obsidian.app/Contents/MacOS/Obsidian',
