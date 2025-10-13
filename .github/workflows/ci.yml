@@ -16,8 +16,6 @@ jobs:
       OBSIDIAN_BINARY_PATH: /obsidian-appimage-extracted/obsidian
       NO_SANDBOX: true
     steps:
-      - name: where am I?!?!
-        run: pwd
       - uses: actions/checkout@v5
         with:
           fetch-depth: 1
