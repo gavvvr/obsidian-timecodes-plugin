@@ -24,8 +24,10 @@ RUN apt-get update && \
       xvfb xauth && \
     rm -rf /var/lib/apt/lists/*
 
-COPY --from=obsidian-extractor /squashfs-root /obsidian
+COPY --from=obsidian-extractor /squashfs-root /obsidian-appimage-extracted
 
 RUN corepack enable pnpm
 
+# for running locally as docker run --rm -it -v $(pwd):/plugin local-ci-runner
 WORKDIR /plugin
+RUN /bin/bash
