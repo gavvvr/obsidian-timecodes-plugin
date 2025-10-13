@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "pretest": "pnpm --dir .. run build",
+    "pretest": "pnpm --dir .. run build:coverage",
     "test": "wdio run wdio.conf.ts"
   },
   "devDependencies": {
