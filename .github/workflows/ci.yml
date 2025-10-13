@@ -58,6 +58,8 @@ jobs:
         with:
           name: lcov-e2e.info
           path: coverage-e2e/
+      - name: debug
+        run: tree
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
