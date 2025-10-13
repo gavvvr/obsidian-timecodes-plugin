@@ -1,5 +1,6 @@
 /// <reference types="wdio-electron-service" />
 import ObsidianApp from './specs/pageobjects/obsidian-app.page'
+import { exportCoverageToLcov } from './test/utils/coverage'
 
 const debug = process.env.DEBUG
 const obsidianBinaryPath = process.env.OBSIDIAN_BINARY_PATH
@@ -39,5 +40,8 @@ export const config: WebdriverIO.Config = {
     await ObsidianApp.removeE2eTestVaultIfExists()
     await ObsidianApp.createAndOpenFreshVault()
     await ObsidianApp.activateTimecodesPlugin()
+  },
+  afterSuite: async () => {
+    await exportCoverageToLcov('out/coverage/lcov.info')
   },
 }
