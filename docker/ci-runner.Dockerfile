@@ -29,4 +29,3 @@ COPY --from=obsidian-extractor /squashfs-root /obsidian
 RUN corepack enable pnpm
 
 WORKDIR /plugin
-CMD pnpm i && cd e2e && pnpm i && xvfb-run pnpm run test
