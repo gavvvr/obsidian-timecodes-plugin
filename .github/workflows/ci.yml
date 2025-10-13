@@ -10,7 +10,11 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/gavvvr/obsidian-timecodes-plugin/ci-runner:e2e-tests-in-CI
     steps:
+      - name: where am I?!?!
+        run: pwd
       - uses: actions/checkout@v5
         with:
           fetch-depth: 1
@@ -28,6 +32,9 @@ jobs:
         run: pnpm run build
       - name: Test
         run: pnpm run test:unit
+      - name: E2E tests
+        run: xvfb-run pnpm run test
+        working-directory: e2e
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
         with:
