@@ -13,7 +13,7 @@ jobs:
     container:
       image: ghcr.io/gavvvr/obsidian-timecodes-plugin/ci-runner:e2e-tests-in-CI
     env:
-      OBSIDIAN_BINARY_PATH: /obsidian/obsidian
+      OBSIDIAN_BINARY_PATH: /obsidian-appimage-extracted/obsidian
       NO_SANDBOX: true
     steps:
       - name: where am I?!?!
