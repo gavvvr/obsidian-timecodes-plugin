@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/gavvvr/obsidian-timecodes-plugin/ci-runner:e2e-tests-in-CI
+    env:
+      OBSIDIAN_BINARY_PATH: /obsidian/obsidian
+      NO_SANDBOX: true
     steps:
       - name: where am I?!?!
         run: pwd
