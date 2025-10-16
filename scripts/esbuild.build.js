@@ -18,7 +18,7 @@ const context = await esbuild.context({
     ? { minify: true, sourcemap: false }
     : {},
   ...coverage
-    ? { minify: true, sourcemap: 'inline' }
+    ? { minify: false, sourcemap: 'inline' }
     : {},
 })
 
