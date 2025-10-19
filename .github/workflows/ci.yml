@@ -29,11 +29,16 @@ jobs:
       - name: E2E tests
         run: pnpm install && xvfb-run pnpm run test
         working-directory: e2e
-      - name: Upload coverage data
+      - name: Upload unit-test coverage data
         uses: actions/upload-artifact@v4
         with:
-          name: lcov.info
+          name: lcov-unit.info
           path: out/coverage/lcov.info
+      - name: Upload E2E-test coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: lcov-e2e.info
+          path: e2e/out/coverage/lcov.info
 
   SonarScan:
     needs: Build
@@ -42,11 +47,16 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Download coverage data
+      - name: Download unit-tests coverage data
         uses: actions/download-artifact@v5
         with:
-          name: lcov.info
-          path: coverage/
+          name: lcov-unit.info
+          path: coverage/unit/
+      - name: Download E2E-tests coverage data
+        uses: actions/download-artifact@v5
+        with:
+          name: lcov-e2e.info
+          path: coverage/e2e/
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
