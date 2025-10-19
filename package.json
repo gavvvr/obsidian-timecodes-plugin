@@ -17,14 +17,14 @@
   "author": "Kirill Gavrilov",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/js": "9.37.0",
-    "@stylistic/eslint-plugin": "5.4.0",
+    "@eslint/js": "9.38.0",
+    "@stylistic/eslint-plugin": "5.5.0",
     "@types/istanbul-lib-instrument": "1.7.8",
-    "@types/node": "24.6.2",
+    "@types/node": "24.8.1",
     "@vitest/coverage-v8": "3.2.4",
     "enquirer": "2.4.1",
-    "esbuild": "0.25.10",
-    "eslint": "9.37.0",
+    "esbuild": "0.25.11",
+    "eslint": "9.38.0",
     "eslint-plugin-perfectionist": "4.15.1",
     "eslint-plugin-wdio": "9.16.2",
     "globals": "16.4.0",
@@ -32,7 +32,7 @@
     "obsidian": "1.10.0",
     "obsidian-utils": "0.10.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.45.0",
+    "typescript-eslint": "8.46.1",
     "vitest": "3.2.4"
   },
   "packageManager": "pnpm@10.18.0"

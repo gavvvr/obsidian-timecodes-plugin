@@ -23,7 +23,7 @@
     "istanbul-lib-source-maps": "5.0.6",
     "istanbul-reports": "3.2.0",
     "obsidian": "1.10.0",
-    "wdio-electron-service": "8.1.0",
+    "wdio-electron-service": "9.2.0",
     "webdriverio": "9.20.0"
   }
 }
