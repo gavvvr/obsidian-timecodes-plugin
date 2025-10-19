@@ -26,6 +26,9 @@ jobs:
         run: pnpm run build
       - name: Test
         run: pnpm run test:unit
+      - name: E2E tests
+        run: pnpm install && xvfb-run pnpm run test
+        working-directory: e2e
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
         with:
