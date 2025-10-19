@@ -4,6 +4,9 @@ import ObsidianApp from './specs/pageobjects/obsidian-app.page'
 const debug = process.env.DEBUG
 const ONE_DAY = 24 * 60 * 60 * 1000
 
+const obsidianBinaryPath = process.env.OBSIDIAN_BINARY_PATH
+const obsidianNoSandbox = process.env.OBSIDIAN_NO_SANDBOX === 'true'
+
 export const config: WebdriverIO.Config = {
   runner: 'local',
   specs: ['./specs/*.e2e.ts'],
@@ -14,8 +17,8 @@ export const config: WebdriverIO.Config = {
       browserName: 'electron',
       'wdio:electronServiceOptions': {
         // custom application args
-        appBinaryPath: '/Applications/Obsidian.app/Contents/MacOS/Obsidian',
-        appArgs: [],
+        appBinaryPath: obsidianBinaryPath ?? '/Applications/Obsidian.app/Contents/MacOS/Obsidian',
+        appArgs: [obsidianNoSandbox ? '--no-sandbox' : '--sandbox'],
       },
     },
   ],
