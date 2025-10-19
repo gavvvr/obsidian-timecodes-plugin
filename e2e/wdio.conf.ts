@@ -1,5 +1,6 @@
 /// <reference types="wdio-electron-service" />
 import ObsidianApp from './specs/pageobjects/obsidian-app.page'
+import { exportCoverageToLcov } from './utils/coverage'
 
 const debug = process.env.DEBUG
 const ONE_DAY = 24 * 60 * 60 * 1000
@@ -39,5 +40,8 @@ export const config: WebdriverIO.Config = {
     await ObsidianApp.removeE2eTestVaultIfExists()
     await ObsidianApp.createAndOpenFreshVault()
     await ObsidianApp.activateTimecodesPlugin()
+  },
+  afterSuite: async () => {
+    await exportCoverageToLcov()
   },
 }
