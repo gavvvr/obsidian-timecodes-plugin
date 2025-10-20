@@ -1,3 +1,5 @@
+import { type Reporters as WdioReporters } from '@wdio/types'
+
 /// <reference types="wdio-electron-service" />
 import ObsidianApp from './specs/pageobjects/obsidian-app.page'
 import { exportCoverageToLcov } from './utils/coverage'
@@ -7,6 +9,15 @@ const ONE_DAY = 24 * 60 * 60 * 1000
 
 const obsidianBinaryPath = process.env.OBSIDIAN_BINARY_PATH
 const obsidianNoSandbox = process.env.OBSIDIAN_NO_SANDBOX === 'true'
+
+const wdioReporters: WdioReporters.ReporterEntry[] = ['spec']
+if (process.env.WDIO_ALLURE_REPORTER) {
+  wdioReporters.push(['allure', {
+    outputDir: 'out/allure-results',
+    disableWebdriverStepsReporting: true,
+    disableWebdriverScreenshotsReporting: false,
+  }])
+}
 
 export const config: WebdriverIO.Config = {
   runner: 'local',
@@ -31,10 +42,15 @@ export const config: WebdriverIO.Config = {
   services: ['electron'],
   framework: 'mocha',
 
-  reporters: ['spec'],
+  reporters: wdioReporters,
   mochaOpts: {
     ui: 'bdd',
     timeout: debug ? ONE_DAY : 60000,
+  },
+  afterTest: async function (_test, _context, { error }) {
+    if (error) {
+      await browser.takeScreenshot()
+    }
   },
   beforeSuite: async () => {
     await ObsidianApp.removeE2eTestVaultIfExists()

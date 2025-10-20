@@ -10,6 +10,8 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-latest
+    env:
+      WDIO_ALLURE_REPORTER: true
     container:
       image: ghcr.io/${{ github.repository }}/ci-runner:node-22-trixie-slim
     steps:
@@ -29,6 +31,29 @@ jobs:
       - name: E2E tests
         run: pnpm install && xvfb-run pnpm run test
         working-directory: e2e
+      - name: Load test report history
+        uses: actions/checkout@v5
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+      - name: Build test report
+        if: always()
+        uses: simple-elf/allure-report-action@v1.13
+        with:
+          allure_results: e2e/out/allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+
       - name: Upload unit-test coverage data
         uses: actions/upload-artifact@v4
         with:
