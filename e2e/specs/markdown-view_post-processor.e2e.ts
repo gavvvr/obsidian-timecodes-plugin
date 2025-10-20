@@ -34,7 +34,7 @@ describe('Markdown view post-processor', () => {
 
   context('Timecode is on the same line as video link', () => {
     it('renders timecode with expected clickable link', async () => {
-      const noteContent = `https://youtu.be/k_ItB5btREU 22:53 - effectiveness characteristics of e2e tests`
+      const noteContent = `https://youtu.be/k_ItB5btREU 22:52 - effectiveness characteristics of e2e tests`
       await ObsidianApp.createNewNoteWithContent(noteContent)
 
       await ObsidianApp.toggleReadingView()
