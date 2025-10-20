@@ -31,6 +31,36 @@ jobs:
       - name: E2E tests
         run: pnpm install && xvfb-run pnpm run test
         working-directory: e2e
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: e2e/out/allure-results/
+
+      - name: Upload unit-test coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: lcov-unit.info
+          path: out/coverage/lcov.info
+      - name: Upload E2E-test coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: lcov-e2e.info
+          path: e2e/out/coverage/lcov.info
+
+  Publish-Allure-Report:
+    runs-on: ubuntu-latest
+    needs: Build
+    if: always()
+    steps:
+      - name: Download Allure results
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
+          path: e2e/out/allure-results/
+      - name: debug
+        run: tree
       - name: Load test report history
         uses: actions/checkout@v5
         if: always()
@@ -53,17 +83,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
-
-      - name: Upload unit-test coverage data
-        uses: actions/upload-artifact@v4
-        with:
-          name: lcov-unit.info
-          path: out/coverage/lcov.info
-      - name: Upload E2E-test coverage data
-        uses: actions/upload-artifact@v4
-        with:
-          name: lcov-e2e.info
-          path: e2e/out/coverage/lcov.info
 
   SonarScan:
     needs: Build
