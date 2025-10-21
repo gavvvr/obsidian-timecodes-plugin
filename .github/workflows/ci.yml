@@ -11,7 +11,7 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/${{ github.repository }}/ci-runner:node-22-trixie-slim
+      image: ghcr.io/${{ github.repository }}/ci-runner:node-22-obsidian-1.9.14-trixie-slim
     steps:
       - uses: actions/checkout@v5
         with:
