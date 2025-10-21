@@ -10,6 +10,7 @@
     "types": [
       "node",
       "@wdio/globals/types",
+      "@wdio/allure-reporter",
       "expect-webdriverio",
       "@wdio/mocha-framework"
     ],

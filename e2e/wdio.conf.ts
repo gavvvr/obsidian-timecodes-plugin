@@ -11,6 +11,13 @@ const obsidianBinaryPath = process.env.OBSIDIAN_BINARY_PATH
 const obsidianNoSandbox = process.env.OBSIDIAN_NO_SANDBOX === 'true'
 
 const wdioReporters: WdioReporters.ReporterEntry[] = ['spec']
+if (process.env.WDIO_ALLURE_REPORTER) {
+  wdioReporters.push(['allure', {
+    outputDir: 'out/allure-results',
+    disableWebdriverStepsReporting: true,
+    disableWebdriverScreenshotsReporting: false,
+  }])
+}
 
 export const config: WebdriverIO.Config = {
   runner: 'local',
