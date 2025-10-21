@@ -47,6 +47,11 @@ export const config: WebdriverIO.Config = {
     ui: 'bdd',
     timeout: debug ? ONE_DAY : 60000,
   },
+  afterTest: async function (_test, _context, { error }) {
+    if (error) {
+      await browser.takeScreenshot()
+    }
+  },
   beforeSuite: async () => {
     await ObsidianApp.removeE2eTestVaultIfExists()
     await ObsidianApp.createAndOpenFreshVault()
