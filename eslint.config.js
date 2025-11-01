@@ -12,7 +12,6 @@ export default tseslint.config(
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
   stylistic.configs.customize({
-    flat: true,
     jsx: false,
     indent: 2,
     quotes: 'single',
