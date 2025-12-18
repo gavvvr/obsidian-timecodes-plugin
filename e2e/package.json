@@ -16,14 +16,14 @@
     "@wdio/local-runner": "9.20.0",
     "@wdio/mocha-framework": "9.20.0",
     "@wdio/spec-reporter": "9.20.0",
-    "electron": "37.6.0",
-    "expect-webdriverio": "5.4.3",
+    "electron": "^37.10.3",
+    "expect-webdriverio": "5.5.0",
     "istanbul-lib-coverage": "3.2.2",
     "istanbul-lib-report": "3.0.1",
     "istanbul-lib-source-maps": "5.0.6",
     "istanbul-reports": "3.2.0",
-    "obsidian": "1.10.0",
-    "wdio-electron-service": "9.2.0",
+    "obsidian": "1.11.0",
+    "wdio-electron-service": "9.2.1",
     "webdriverio": "9.20.0"
   }
 }
