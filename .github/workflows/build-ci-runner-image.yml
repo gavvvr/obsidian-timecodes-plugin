@@ -23,7 +23,7 @@ on:
         required: true
 
 env:
-  NODEJS_VERSION: ${{ inputs.nodejs_version || '22' }}
+  NODEJS_VERSION: ${{ inputs.nodejs_version || '24' }}
   OBSIDIAN_VERSION: ${{ inputs.obsidian_version || '1.9.14' }}
   DEBIAN_VERSION: ${{ inputs.debian_version || 'trixie' }}
 
