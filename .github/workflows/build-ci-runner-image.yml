@@ -24,7 +24,7 @@ on:
 
 env:
   NODEJS_VERSION: ${{ inputs.nodejs_version || '24' }}
-  OBSIDIAN_VERSION: ${{ inputs.obsidian_version || '1.9.14' }}
+  OBSIDIAN_VERSION: ${{ inputs.obsidian_version || '1.12.7' }}
   DEBIAN_VERSION: ${{ inputs.debian_version || 'trixie' }}
 
   IMAGE_NAME: ghcr.io/${{ github.repository }}/ci-runner
