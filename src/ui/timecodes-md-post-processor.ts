@@ -24,7 +24,7 @@ export function turnRawTimecodesIntoClickableLinks(
   }
   latestNoteBeingProcessed = currentNoteSourcePath
 
-  let node: Node | null = null
+  let node: Node | null
   const nodesWithTimecodes: Text[] = []
   const nodeWalker = document.createTreeWalker(root, NodeFilter.SHOW_ALL)
   while ((node = nodeWalker.nextNode()) != null) {
