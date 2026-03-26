@@ -61,6 +61,7 @@ jobs:
           file: ${{ env.DOCKERFILE_PATH }}
           build-args: |
             NODEJS_VERSION=${{ env.NODEJS_VERSION }}
+            OBSIDIAN_VERSION=${{ env.OBSIDIAN_VERSION }}
             DEBIAN_VERSION=${{ env.DEBIAN_VERSION }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
