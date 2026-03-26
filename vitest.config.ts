@@ -5,12 +5,12 @@ export default defineConfig({
     {
       name: 'virtual-obsidian',
       enforce: 'pre',
-      resolveId(id) {
+      resolveId(id: string) {
         if (id === 'obsidian') {
           return '\0obsidian'
         }
       },
-      load(id) {
+      load(id: string) {
         if (id === '\0obsidian') {
           return `
             export class Plugin {}
