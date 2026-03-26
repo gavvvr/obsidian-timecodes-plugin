@@ -38,7 +38,7 @@ export function turnRawTimecodesIntoClickableLinks(
         textForFindingVideoLink = elementNode.src
       }
       if (elementNode instanceof HTMLMediaElement) {
-        latestRequiredEnricher = localMedicaEnricherFor(elementNode)
+        latestRequiredEnricher = localMediaEnricherFor(elementNode)
       }
     } else if (node.nodeType === Node.TEXT_NODE) {
       const textNode = node as Text
@@ -123,7 +123,7 @@ const youtubeEnricherFor = (videoId: string): TextTimecodeEnricher => ({
   },
 })
 
-const localMedicaEnricherFor = (media: HTMLMediaElement): TextTimecodeEnricher => ({
+const localMediaEnricherFor = (media: HTMLMediaElement): TextTimecodeEnricher => ({
   composeLinkElementWithTimecode: (raw, timecode) => {
     const link = document.createElement('a')
     link.href = '#'
