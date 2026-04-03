@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "rootDir": "./src",
     "target": "ES6",
     "noImplicitAny": true,
     "isolatedModules": true,
