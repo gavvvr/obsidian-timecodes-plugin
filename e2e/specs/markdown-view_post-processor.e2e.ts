@@ -12,7 +12,7 @@ describe('Markdown view post-processor', () => {
       const link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="22:53"]')
       await expect(link).toBePresent()
       const href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
+      expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
     })
   })
 
@@ -28,7 +28,7 @@ describe('Markdown view post-processor', () => {
       const link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="22:53"]')
       await expect(link).toBePresent()
       const href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
+      expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
     })
   })
 
@@ -42,7 +42,7 @@ describe('Markdown view post-processor', () => {
       const link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="22:53"]')
       await expect(link).toBePresent()
       const href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
+      expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
     })
   })
 
@@ -58,7 +58,7 @@ describe('Markdown view post-processor', () => {
       const link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="22:53"]')
       await expect(link).toBePresent()
       const href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
+      expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
     })
   })
 
@@ -78,7 +78,7 @@ referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       const link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="22:53"]')
       await expect(link).toBePresent()
       const href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
+      expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
     })
   })
 
@@ -102,17 +102,17 @@ https://www.youtube.com/watch?v=k_ItB5btREU
       let link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="14:27"]')
       await expect(link).toBePresent()
       let href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/Z5n9VK3sOnI?t=867')
+      expect(href).toBe('https://youtu.be/Z5n9VK3sOnI?t=867')
 
       link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="4:07"]')
       await expect(link).toBePresent()
       href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/Lipf5piizZc?t=247')
+      expect(href).toBe('https://youtu.be/Lipf5piizZc?t=247')
 
       link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="22:53"]')
       await expect(link).toBePresent()
       href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
+      expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
     })
   })
 
@@ -140,17 +140,17 @@ referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       let link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="14:27"]')
       await expect(link).toBePresent()
       let href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/Z5n9VK3sOnI?t=867')
+      expect(href).toBe('https://youtu.be/Z5n9VK3sOnI?t=867')
 
       link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="4:07"]')
       await expect(link).toBePresent()
       href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/Lipf5piizZc?t=247')
+      expect(href).toBe('https://youtu.be/Lipf5piizZc?t=247')
 
       link = $('//div[contains(@class, "markdown-preview-section")]//a[text()="22:53"]')
       await expect(link).toBePresent()
       href = await link.getAttribute('href')
-      await expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
+      expect(href).toBe('https://youtu.be/k_ItB5btREU?t=1373')
     })
   })
 
@@ -176,7 +176,7 @@ https://www.youtube.com/watch?v=k_ItB5btREU
       const textLinesFromAllNoteParagraphs = $$('.markdown-preview-section p:not(.mod-ui)')
         .map(p => p.getText())
       const textFromAllNoteParagraphs = (await textLinesFromAllNoteParagraphs).join('\n\n')
-      await expect(textFromAllNoteParagraphs).toBe(noteContent)
+      expect(textFromAllNoteParagraphs).toBe(noteContent)
     })
   })
 })
