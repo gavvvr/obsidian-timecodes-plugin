@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "rootDir": ".",
     "target": "ES6",
     "noImplicitAny": true,
     "isolatedModules": true,
