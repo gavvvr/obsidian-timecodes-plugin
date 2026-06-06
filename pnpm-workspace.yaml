@@ -1,0 +1,9 @@
+packages:
+  - 'e2e'
+allowBuilds:
+  edgedriver: false
+  electron: false
+  esbuild: false
+  geckodriver: false
+minimumReleaseAgeExclude:
+  - '@types/node@24.13.1'
