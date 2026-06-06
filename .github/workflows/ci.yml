@@ -22,7 +22,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
       - name: Environment details
-        run: pnpm version
+        run: pnpm dlx envinfo --system --binaries
       - name: Install dependencies
         run: pnpm install
       - name: Build
