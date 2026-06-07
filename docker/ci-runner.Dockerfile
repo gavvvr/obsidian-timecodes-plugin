@@ -46,4 +46,4 @@ RUN corepack enable pnpm
 
 # for running locally as: docker run --rm -it -v ${PWD}:/plugin local-ci-runner
 WORKDIR /plugin
-CMD ["sh", "-c", "pnpm i && cd e2e && pnpm i && xvfb-run pnpm run test"]
+CMD ["sh", "-c", "pnpm i && cd e2e && xvfb-run pnpm run test"]
