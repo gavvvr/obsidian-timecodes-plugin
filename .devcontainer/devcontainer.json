@@ -1,0 +1,14 @@
+{
+  "name": "Obsidian Timecodes Plugin",
+  "postCreateCommand": "pnpm install",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "EditorConfig.EditorConfig",
+        "vitest.explorer"
+      ]
+    }
+  }
+}
