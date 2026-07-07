@@ -20,23 +20,23 @@
     "node": ">=24 <25"
   },
   "devDependencies": {
-    "@eslint/js": "10.0.1",
-    "@stylistic/eslint-plugin": "5.10.0",
-    "@types/istanbul-lib-instrument": "1.7.8",
-    "@types/node": "24.13.2",
-    "@vitest/coverage-v8": "4.1.10",
-    "enquirer": "2.4.1",
-    "esbuild": "0.28.1",
-    "eslint": "10.7.0",
-    "eslint-plugin-perfectionist": "5.10.0",
-    "eslint-plugin-wdio": "9.29.1",
-    "globals": "17.7.0",
-    "istanbul-lib-instrument": "6.0.3",
-    "obsidian": "1.12.3",
-    "obsidian-utils": "0.10.2",
-    "typescript": "6.0.3",
-    "typescript-eslint": "8.64.0",
-    "vitest": "4.1.10"
+    "@eslint/js": "catalog:eslint",
+    "@stylistic/eslint-plugin": "catalog:eslint",
+    "@types/istanbul-lib-instrument": "catalog:types",
+    "@types/node": "catalog:types",
+    "@vitest/coverage-v8": "catalog:testing",
+    "enquirer": "catalog:devScripting",
+    "esbuild": "catalog:devTools",
+    "eslint": "catalog:eslint",
+    "eslint-plugin-perfectionist": "catalog:eslint",
+    "eslint-plugin-wdio": "catalog:eslint",
+    "globals": "catalog:eslint",
+    "istanbul-lib-instrument": "catalog:devScripting",
+    "obsidian": "catalog:types",
+    "obsidian-utils": "catalog:devScripting",
+    "typescript": "catalog:devTools",
+    "typescript-eslint": "catalog:eslint",
+    "vitest": "catalog:testing"
   },
-  "packageManager": "pnpm@11.10.0"
+  "packageManager": "pnpm@11.14.0"
 }
