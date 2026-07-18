@@ -4,13 +4,19 @@ import js from '@eslint/js'
 import stylistic from '@stylistic/eslint-plugin'
 import perfectionist from 'eslint-plugin-perfectionist'
 import * as wdio from 'eslint-plugin-wdio'
+import { defineConfig } from 'eslint/config'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
-export default tseslint.config(
-  js.configs.recommended,
-  tseslint.configs.strictTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
+export default defineConfig(
+  {
+    files: ['**/*.{js,ts}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+    ],
+  },
   stylistic.configs.customize({
     jsx: false,
     indent: 2,
