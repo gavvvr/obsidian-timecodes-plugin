@@ -66,9 +66,9 @@ RUN apt-get update \
 
 USER node
 
-COPY --chown=node:root --from=obsidian-extractor /squashfs-root /workspaces/obsidian-appimage-extracted
+COPY --chown=node:root --from=obsidian-extractor /squashfs-root /opt/obsidian-appimage-extracted
 
-ENV OBSIDIAN_BINARY_PATH=/workspaces/obsidian-appimage-extracted/obsidian
+ENV OBSIDIAN_BINARY_PATH=/opt/obsidian-appimage-extracted/obsidian
 ENV DISPLAY=:1
 
 RUN mkdir -p /home/node/Desktop
