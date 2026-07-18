@@ -71,10 +71,10 @@ COPY --chown=node:root --from=obsidian-extractor /squashfs-root /workspaces/obsi
 ENV OBSIDIAN_BINARY_PATH=/workspaces/obsidian-appimage-extracted/obsidian
 ENV DISPLAY=:1
 
-RUN mkdir -p /node/Desktop
+RUN mkdir -p /home/node/Desktop
 
 # Extracted version (основная, которую используешь для разработки)
-COPY <<'EOF' /node/Desktop/obsidian-extracted.desktop
+COPY --chown=node:node --chmod=755 <<'EOF' /home/node/Desktop/obsidian-extracted.desktop
 [Desktop Entry]
 Version=1.0
 Type=Application
@@ -85,7 +85,7 @@ Terminal=false
 EOF
 
 # AppImage version (для сравнения/тестирования)
-#COPY <<'EOF' /codespace/Desktop/obsidian-appimage.desktop
+#COPY <<'EOF' /home/node/Desktop/obsidian-appimage.desktop
 #[Desktop Entry]
 #Version=1.0
 #Type=Application
@@ -95,7 +95,7 @@ EOF
 #Terminal=false
 #EOF
 
-RUN chmod +x /node/Desktop/*.desktop
+RUN chmod +x /home/node/Desktop/*.desktop
 
 FROM --platform=${TARGET_IMAGE_PLATFORM} ${BASE_IMAGE} AS ci-image
 RUN apt-get update && \
