@@ -58,17 +58,17 @@ RUN apt-get update \
 #    && rm -rf /var/lib/apt/lists/*
 
 # minimalistic window/file-manager
-RUN #apt-get update \
+# RUN #apt-get update \
 #    && apt-get install -y --no-install-recommends \
 #      openbox \
 #      pcmanfm \
 #    && rm -rf /var/lib/apt/lists/*
 
-USER codespace
+USER node
 
-COPY --from=obsidian-extractor /squashfs-root /opt/obsidian-appimage-extracted
+COPY --chown=node:root --from=obsidian-extractor /squashfs-root /workspaces/obsidian-appimage-extracted
 
-ENV OBSIDIAN_BINARY_PATH=/opt/obsidian-appimage-extracted/obsidian
+ENV OBSIDIAN_BINARY_PATH=/workspaces/obsidian-appimage-extracted/obsidian
 ENV DISPLAY=:1
 
 RUN mkdir -p /codespace/Desktop
