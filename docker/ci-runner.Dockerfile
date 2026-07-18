@@ -1,9 +1,9 @@
-ARG NODEJS_VERSION=22
+ARG NODEJS_VERSION=24
 ARG DEBIAN_VERSION=trixie
 ARG BASE_IMAGE=node:${NODEJS_VERSION}-${DEBIAN_VERSION}-slim
 ARG TARGET_IMAGE_PLATFORM=linux/amd64
 
-ARG OBSIDIAN_VERSION=1.9.14
+ARG OBSIDIAN_VERSION=1.12.7
 ARG OBSIDIAN_APPIMAGE_FILE=Obsidian-${OBSIDIAN_VERSION}.AppImage
 
 FROM busybox:latest AS obsidian-downloader
@@ -30,7 +30,62 @@ unsquashfs image.squashfs
 
 FROM obsidian-extractor-${TARGETARCH} AS obsidian-extractor
 
-FROM --platform=${TARGET_IMAGE_PLATFORM} ${BASE_IMAGE}
+FROM mcr.microsoft.com/devcontainers/javascript-node:24 AS devcontainer
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends --no-install-suggests \
+      # 'x11-xserver-utils' contains xrandr
+      x11-xserver-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+# For opening .AppImage files
+#RUN apt-get update && \
+#    apt-get install -y --no-install-recommends \
+#      libfuse2 \
+#      fuse3 \
+#    && rm -rf /var/lib/apt/lists/*
+
+# minimalistic window/file-manager
+RUN #apt-get update \
+#    && apt-get install -y --no-install-recommends \
+#      openbox \
+#      pcmanfm \
+#    && rm -rf /var/lib/apt/lists/*
+
+USER codespace
+
+COPY --from=obsidian-extractor /squashfs-root /opt/obsidian-appimage-extracted
+
+ENV OBSIDIAN_BINARY_PATH=/opt/obsidian-appimage-extracted/obsidian
+ENV DISPLAY=:1
+
+RUN mkdir -p /codespace/Desktop
+
+# Extracted version (основная, которую используешь для разработки)
+COPY <<'EOF' /codespace/Desktop/obsidian-extracted.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Obsidian (Extracted)
+Exec=/opt/obsidian-appimage-extracted/obsidian
+Icon=/opt/obsidian-appimage-extracted/obsidian.png
+Terminal=false
+EOF
+
+# AppImage version (для сравнения/тестирования)
+#COPY <<'EOF' /codespace/Desktop/obsidian-appimage.desktop
+#[Desktop Entry]
+#Version=1.0
+#Type=Application
+#Name=Obsidian (AppImage)
+#Exec=/obsidian-appimage-extracted/../Obsidian.AppImage
+#Icon=/obsidian-appimage-extracted/obsidian.png
+#Terminal=false
+#EOF
+
+RUN chmod +x /codespace/Desktop/*.desktop
+
+FROM --platform=${TARGET_IMAGE_PLATFORM} ${BASE_IMAGE} AS ci-image
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests \
       libgtk-3-0 libnss3 libgbm1 libasound2 \
