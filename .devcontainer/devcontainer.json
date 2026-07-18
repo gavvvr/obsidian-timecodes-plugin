@@ -1,14 +1,5 @@
 {
   "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
-  "runArgs": [
-    "--device=/dev/fuse",
-    "--security-opt", "apparmor=unconfined",
-    "--security-opt", "seccomp=unconfined"
-  ],
-
-  "capAdd": [
-    "SYS_ADMIN"
-  ],
   "name": "Obsidian Timecodes Plugin",
   "postCreateCommand": "pnpm install",
 
