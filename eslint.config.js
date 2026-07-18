@@ -1,6 +1,6 @@
 // @ts-check
 
-import eslint from '@eslint/js'
+import js from '@eslint/js'
 import stylistic from '@stylistic/eslint-plugin'
 import perfectionist from 'eslint-plugin-perfectionist'
 import * as wdio from 'eslint-plugin-wdio'
@@ -8,7 +8,7 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  eslint.configs.recommended,
+  js.configs.recommended,
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
   stylistic.configs.customize({
