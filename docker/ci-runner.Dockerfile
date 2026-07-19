@@ -50,8 +50,10 @@ RUN apt-get update \
 #      x11-xserver-utils \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update \
-    && export DEBIAN_FRONTEND=noninteractive && apt-get install -y firefox-esr \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_$(dpkg --print-architecture).deb -o /tmp/chrome.deb \
+    && apt-get -y install /tmp/chrome.deb \
+    && rm /tmp/chrome.deb \
     && rm -rf /var/lib/apt/lists/*
 
 # For opening .AppImage files
