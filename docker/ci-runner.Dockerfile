@@ -47,7 +47,11 @@ RUN apt-get update \
         xvfb \
         xauth \
       # 'x11-xserver-utils' contains xrandr
-      x11-xserver-utils \
+#      x11-xserver-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive && apt-get install -y firefox-esr \
     && rm -rf /var/lib/apt/lists/*
 
 # For opening .AppImage files
