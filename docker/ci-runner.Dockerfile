@@ -44,10 +44,6 @@ RUN apt-get update \
         libgtk-3-0 \
         libgbm1 \
         libasound2 \
-        xvfb \
-        xauth \
-      # 'x11-xserver-utils' contains xrandr
-#      x11-xserver-utils \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
