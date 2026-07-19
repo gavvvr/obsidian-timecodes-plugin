@@ -66,9 +66,10 @@ RUN apt-get update \
 
 USER node
 
-COPY --chown=node:root --from=obsidian-extractor /squashfs-root /opt/obsidian-appimage-extracted
+COPY --chown=node:node --from=obsidian-extractor /squashfs-root /home/node/obsidian-appimage-extracted
 
-ENV OBSIDIAN_BINARY_PATH=/opt/obsidian-appimage-extracted/obsidian
+ENV OBSIDIAN_BINARY_PATH=/home/node/obsidian-appimage-extracted/obsidian
+ENV OBSIDIAN_NO_SANDBOX=true
 ENV DISPLAY=:1
 
 RUN mkdir -p /home/node/Desktop
@@ -79,8 +80,8 @@ COPY --chown=node:node --chmod=755 <<'EOF' /home/node/Desktop/obsidian-extracted
 Version=1.0
 Type=Application
 Name=Obsidian (Extracted)
-Exec=/opt/obsidian-appimage-extracted/obsidian
-Icon=/opt/obsidian-appimage-extracted/obsidian.png
+Exec=/home/node/obsidian-appimage-extracted/obsidian
+Icon=/home/node/obsidian-appimage-extracted/obsidian.png
 Terminal=false
 EOF
 

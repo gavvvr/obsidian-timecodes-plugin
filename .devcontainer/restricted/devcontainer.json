@@ -3,6 +3,9 @@
     "dockerfile": "../../docker/ci-runner.Dockerfile",
     "target": "devcontainer"
   },
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {}
+  },
   "name": "Obsidian Timecodes Plugin - restricted container",
   "postCreateCommand": "pnpm install",
 
