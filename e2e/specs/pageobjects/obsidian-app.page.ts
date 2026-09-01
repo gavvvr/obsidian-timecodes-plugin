@@ -45,7 +45,7 @@ class ObsidianApp {
 
   async closeModal(modalName: string) {
     console.log(`Closing '${modalName}'`)
-    await $('.modal-close-button').click()
+    await $('.modal .modal-header-button .lucide-x').click()
   }
 
   async createNewNoteWithContent(content: string) {
