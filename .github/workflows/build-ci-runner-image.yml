@@ -18,7 +18,7 @@ on:
         description: 'Obsidian version to test with'
         type: string
         required: true
-        default: '1.12.7'
+        default: '1.13.7'
       debian_version:
         description: 'Debian codename version to use'
         type: string
