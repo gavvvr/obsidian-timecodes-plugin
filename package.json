@@ -7,7 +7,8 @@
     "build": "tsc -noEmit -skipLibCheck && node scripts/esbuild.build.js production",
     "build:coverage": "node scripts/esbuild.build.js coverage",
     "test:eslint": "eslint --cache --cache-location out/.eslintcache",
-    "test:unit": "vitest --coverage"
+    "test:unit": "vitest --coverage",
+    "test:e2e": "pnpm --filter obsidian-timecodes-plugin-e2e-tests run test"
   },
   "keywords": [
     "obsidian.md",
