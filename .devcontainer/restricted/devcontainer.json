@@ -17,8 +17,8 @@
   "name": "Obsidian Timecodes Plugin - restricted container",
   "postCreateCommand": [
     "pnpm install",
-    "sudo cp .devcontainer/novnc-custom/index.html /usr/local/novnc/noVNC-*/"
-  ]
+    "sudo cp .devcontainer/novnc-custom/index.html /usr/local/novnc/noVNC-*/",
+  ],
 
   "customizations": {
     "vscode": {
