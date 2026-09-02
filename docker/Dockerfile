@@ -30,6 +30,74 @@ unsquashfs image.squashfs
 
 FROM obsidian-extractor-${TARGETARCH} AS obsidian-extractor
 
+FROM mcr.microsoft.com/devcontainers/javascript-node:24 AS devcontainer
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends --no-install-suggests \
+        libnspr4 \
+        libnss3 \
+        libdbus-1-3 \
+        libatk1.0-0 \
+        libatk1.0-0 \
+        libatk-bridge2.0-0 \
+        libcups2 \
+        libgtk-3-0 \
+        libgbm1 \
+        libasound2 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive && apt-get install -y firefox-esr \
+    && rm -rf /var/lib/apt/lists/*
+
+# For opening .AppImage files
+#RUN apt-get update && \
+#    apt-get install -y --no-install-recommends \
+#      libfuse2 \
+#      fuse3 \
+#    && rm -rf /var/lib/apt/lists/*
+
+# minimalistic window/file-manager
+# RUN #apt-get update \
+#    && apt-get install -y --no-install-recommends \
+#      openbox \
+#      pcmanfm \
+#    && rm -rf /var/lib/apt/lists/*
+
+USER node
+
+COPY --chown=node:node --from=obsidian-extractor /squashfs-root /home/node/obsidian-appimage-extracted
+
+ENV OBSIDIAN_BINARY_PATH=/home/node/obsidian-appimage-extracted/obsidian
+ENV OBSIDIAN_NO_SANDBOX=true
+ENV DISPLAY=:1
+
+RUN mkdir -p /home/node/Desktop
+
+# Extracted version (основная, которую используешь для разработки)
+COPY --chown=node:node --chmod=755 <<'EOF' /home/node/Desktop/obsidian-extracted.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Obsidian (Extracted)
+Exec=/home/node/obsidian-appimage-extracted/obsidian
+Icon=/home/node/obsidian-appimage-extracted/obsidian.png
+Terminal=false
+EOF
+
+# AppImage version (для сравнения/тестирования)
+#COPY <<'EOF' /home/node/Desktop/obsidian-appimage.desktop
+#[Desktop Entry]
+#Version=1.0
+#Type=Application
+#Name=Obsidian (AppImage)
+#Exec=/obsidian-appimage-extracted/../Obsidian.AppImage
+#Icon=/obsidian-appimage-extracted/obsidian.png
+#Terminal=false
+#EOF
+
+RUN chmod +x /home/node/Desktop/*.desktop
+
 FROM --platform=${TARGET_IMAGE_PLATFORM} ${BASE_IMAGE} AS ci-image
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests \
