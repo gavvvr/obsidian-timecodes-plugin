@@ -1,17 +1,17 @@
 {
   "build": {
     "dockerfile": "../../docker/Dockerfile",
-    "target": "devcontainer"
+    "target": "devcontainer",
   },
   "features": {
     "ghcr.io/devcontainers/features/desktop-lite:1": {
-      "noVncVersion": "1.7.0"
+      "noVncVersion": "1.7.0",
     }
   },
   "forwardPorts": [6080],
   "portsAttributes": {
     "6080": {
-      "label": "desktop"
+      "label": "desktop",
     }
   },
   "name": "Obsidian Timecodes Plugin - restricted container",
@@ -25,7 +25,7 @@
       "extensions": [
         "dbaeumer.vscode-eslint",
         "EditorConfig.EditorConfig",
-        "vitest.explorer"
+        "vitest.explorer",
       ]
     }
   }
