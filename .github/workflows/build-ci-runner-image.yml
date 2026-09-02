@@ -21,7 +21,7 @@ on:
 
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}/ci-runner
-  DOCKERFILE_PATH: docker/ci-runner.Dockerfile
+  DOCKERFILE_PATH: docker/Dockerfile
 
 jobs:
   build:
