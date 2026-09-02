@@ -16,11 +16,11 @@ jobs:
     container:
       image: ghcr.io/${{ github.repository }}/ci-runner:node-24-obsidian-1.13.7-trixie-slim
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 1
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
       - name: Environment details
         run: pnpm dlx envinfo --system --binaries
       - name: Install dependencies
@@ -33,12 +33,12 @@ jobs:
         run: xvfb-run pnpm run test
         working-directory: e2e
       - name: Upload unit-test coverage data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lcov-unit.info
           path: out/coverage/lcov.info
       - name: Upload E2E-test coverage data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lcov-e2e.info
           path: e2e/out/coverage/lcov.info
@@ -47,20 +47,20 @@ jobs:
     needs: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Download unit-tests coverage data
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: lcov-unit.info
           path: coverage/unit/
       - name: Download E2E-tests coverage data
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: lcov-e2e.info
           path: coverage/e2e/
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v6
+        uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
