@@ -20,11 +20,9 @@ jobs:
         with:
           fetch-depth: 1
       - name: Install pnpm
-        uses: pnpm/action-setup@v6
-      - name: Environment details
-        run: pnpm dlx envinfo --system --binaries
-      - name: Install dependencies
-        run: pnpm install
+        uses: pnpm/setup@v2
+        with:
+          install: true
       - name: Build
         run: pnpm run build
       - name: Test

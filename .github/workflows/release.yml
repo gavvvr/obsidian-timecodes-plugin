@@ -17,11 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install pnpm
-        uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v7
+        uses: pnpm/setup@v2
         with:
-          node-version: '24'
-          package-manager-cache: false
+          runtime: node@24
+          install: false
+          cache: true
       - name: Environment details
         run: pnpm dlx envinfo --system --binaries
       - name: Build
