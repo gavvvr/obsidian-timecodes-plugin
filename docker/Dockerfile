@@ -30,7 +30,7 @@ unsquashfs image.squashfs
 
 FROM obsidian-extractor-${TARGETARCH} AS obsidian-extractor
 
-FROM --platform=${TARGET_IMAGE_PLATFORM} ${BASE_IMAGE}
+FROM --platform=${TARGET_IMAGE_PLATFORM} ${BASE_IMAGE} AS ci-image
 RUN apt-get update && \
     apt-get install -y --no-install-recommends --no-install-suggests \
       libgtk-3-0 libnss3 libgbm1 libasound2 \

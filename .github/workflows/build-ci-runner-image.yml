@@ -52,6 +52,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           file: ${{ env.DOCKERFILE_PATH }}
+          target: ci-image
           build-args: |
             NODEJS_VERSION=${{ inputs.nodejs_version }}
             OBSIDIAN_VERSION=${{ inputs.obsidian_version }}
