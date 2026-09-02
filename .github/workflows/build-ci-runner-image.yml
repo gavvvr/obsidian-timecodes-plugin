@@ -1,12 +1,6 @@
 name: Docker image for CI
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/build-ci-runner-image.yml'
-      - 'docker/ci-runner.Dockerfile'
   workflow_dispatch:
     inputs:
       nodejs_version:
