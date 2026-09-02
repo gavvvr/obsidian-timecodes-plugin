@@ -57,5 +57,3 @@ allowBuilds:
   electron: false
   esbuild: false
   geckodriver: false
-minimumReleaseAgeExclude:
-  - '@types/node@24.13.1'
