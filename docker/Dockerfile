@@ -60,6 +60,20 @@ ENV DISPLAY=:1
 
 RUN wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
 
+FROM --platform=${TARGET_IMAGE_PLATFORM} ${BASE_IMAGE} AS ci-image
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends --no-install-suggests \
+      libgtk-3-0 libnss3 libgbm1 libasound2 \
+      xvfb xauth && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY --from=obsidian-extractor /squashfs-root /obsidian-appimage-extracted
+
+ENV OBSIDIAN_BINARY_PATH=/obsidian-appimage-extracted/obsidian
+ENV OBSIDIAN_NO_SANDBOX=true
+
+RUN wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+
 # for running locally as: docker run --rm -it -v ${PWD}:/plugin local-ci-runner
 WORKDIR /plugin
 CMD ["sh", "-c", "pnpm i && cd e2e && xvfb-run pnpm run test"]
