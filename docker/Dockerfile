@@ -72,6 +72,8 @@ ENV OBSIDIAN_BINARY_PATH=/home/node/obsidian-appimage-extracted/obsidian
 ENV OBSIDIAN_NO_SANDBOX=true
 ENV DISPLAY=:1
 
+RUN wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+
 RUN mkdir -p /home/node/Desktop
 
 # Extracted version (основная, которую используешь для разработки)
@@ -110,7 +112,7 @@ COPY --from=obsidian-extractor /squashfs-root /obsidian-appimage-extracted
 ENV OBSIDIAN_BINARY_PATH=/obsidian-appimage-extracted/obsidian
 ENV OBSIDIAN_NO_SANDBOX=true
 
-RUN corepack enable pnpm
+RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=next-12 bash -
 
 # for running locally as: docker run --rm -it -v ${PWD}:/plugin local-ci-runner
 WORKDIR /plugin
