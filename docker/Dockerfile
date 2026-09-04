@@ -50,20 +50,6 @@ RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive && apt-get install -y firefox-esr \
     && rm -rf /var/lib/apt/lists/*
 
-# For opening .AppImage files
-#RUN apt-get update && \
-#    apt-get install -y --no-install-recommends \
-#      libfuse2 \
-#      fuse3 \
-#    && rm -rf /var/lib/apt/lists/*
-
-# minimalistic window/file-manager
-# RUN #apt-get update \
-#    && apt-get install -y --no-install-recommends \
-#      openbox \
-#      pcmanfm \
-#    && rm -rf /var/lib/apt/lists/*
-
 USER node
 
 COPY --chown=node:node --from=obsidian-extractor /squashfs-root /home/node/obsidian-appimage-extracted
@@ -73,46 +59,6 @@ ENV OBSIDIAN_NO_SANDBOX=true
 ENV DISPLAY=:1
 
 RUN wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
-
-RUN mkdir -p /home/node/Desktop
-
-# Extracted version (основная, которую используешь для разработки)
-COPY --chown=node:node --chmod=755 <<'EOF' /home/node/Desktop/obsidian-extracted.desktop
-[Desktop Entry]
-Version=1.0
-Type=Application
-Name=Obsidian (Extracted)
-Exec=/home/node/obsidian-appimage-extracted/obsidian
-Icon=/home/node/obsidian-appimage-extracted/obsidian.png
-Terminal=false
-EOF
-
-# AppImage version (для сравнения/тестирования)
-#COPY <<'EOF' /home/node/Desktop/obsidian-appimage.desktop
-#[Desktop Entry]
-#Version=1.0
-#Type=Application
-#Name=Obsidian (AppImage)
-#Exec=/obsidian-appimage-extracted/../Obsidian.AppImage
-#Icon=/obsidian-appimage-extracted/obsidian.png
-#Terminal=false
-#EOF
-
-RUN chmod +x /home/node/Desktop/*.desktop
-
-FROM --platform=${TARGET_IMAGE_PLATFORM} ${BASE_IMAGE} AS ci-image
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends --no-install-suggests \
-      libgtk-3-0 libnss3 libgbm1 libasound2 \
-      xvfb xauth && \
-    rm -rf /var/lib/apt/lists/*
-
-COPY --from=obsidian-extractor /squashfs-root /obsidian-appimage-extracted
-
-ENV OBSIDIAN_BINARY_PATH=/obsidian-appimage-extracted/obsidian
-ENV OBSIDIAN_NO_SANDBOX=true
-
-RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=next-12 bash -
 
 # for running locally as: docker run --rm -it -v ${PWD}:/plugin local-ci-runner
 WORKDIR /plugin
