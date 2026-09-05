@@ -22,7 +22,6 @@ jobs:
       - name: Install pnpm
         uses: pnpm/setup@v2
         with:
-          version: ^12.0.0
           install: true
       - name: Build
         run: pnpm run build
