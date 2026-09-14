@@ -8,10 +8,10 @@ ARG OBSIDIAN_APPIMAGE_FILE=Obsidian-${OBSIDIAN_VERSION}.AppImage
 
 FROM alpine:3 AS downloader
 RUN apk add --no-cache \
-    wget
+    curl
 ARG OBSIDIAN_VERSION
 ARG OBSIDIAN_APPIMAGE_FILE
-RUN wget https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/${OBSIDIAN_APPIMAGE_FILE}
+RUN curl -sSL -O https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/${OBSIDIAN_APPIMAGE_FILE}
 
 FROM ${BASE_IMAGE} AS obsidian-extractor-amd64
 ARG OBSIDIAN_APPIMAGE_FILE
