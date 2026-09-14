@@ -6,7 +6,9 @@ ARG TARGET_IMAGE_PLATFORM=linux/amd64
 ARG OBSIDIAN_VERSION=1.13.7
 ARG OBSIDIAN_APPIMAGE_FILE=Obsidian-${OBSIDIAN_VERSION}.AppImage
 
-FROM busybox:latest AS obsidian-downloader
+FROM alpine:3 AS obsidian-downloader
+RUN apk add --no-cache \
+    wget
 ARG OBSIDIAN_VERSION
 ARG OBSIDIAN_APPIMAGE_FILE
 RUN wget https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/${OBSIDIAN_APPIMAGE_FILE}
