@@ -2,8 +2,8 @@
 
 ## Prerequisites
 
-- Get a [Node.js](https://nodejs.org/)
-- Execute `corepack enable` to enable PnPM package manager
+- Get LTS version of [Node.js](https://nodejs.org/)
+- Install [pnpm](https://pnpm.io/installation)
 
 ## Development
 
