@@ -17,9 +17,6 @@
   ],
   "author": "Kirill Gavrilov",
   "license": "MIT",
-  "engines": {
-    "node": ">=24 <25"
-  },
   "devDependencies": {
     "@eslint/js": "catalog:eslint",
     "@stylistic/eslint-plugin": "catalog:eslint",
