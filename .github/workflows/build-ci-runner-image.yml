@@ -7,7 +7,7 @@ on:
         description: 'Node.js version to use'
         type: string
         required: true
-        default: '24'
+        default: '26'
       obsidian_version:
         description: 'Obsidian version to test with'
         type: string
