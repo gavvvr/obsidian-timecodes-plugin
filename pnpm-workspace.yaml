@@ -3,21 +3,21 @@ packages:
 
 catalogs:
   eslint:
-    eslint: 10.11.0
+    eslint: 10.12.0
     '@eslint/js': 10.0.1
-    globals: 17.12.0
+    globals: 17.13.0
 
-    typescript-eslint: 8.70.0
+    typescript-eslint: 8.71.2
     '@stylistic/eslint-plugin': 5.10.0
-    eslint-plugin-perfectionist: 5.11.1
-    eslint-plugin-wdio: 9.31.3
+    eslint-plugin-perfectionist: 5.12.1
+    eslint-plugin-wdio: 10.0.1
 
   types:
-    obsidian: 1.13.1
-    electron: 43.3.0
+    obsidian: 1.14.4
+    electron: 43.7.7
 
     '@types/istanbul-lib-instrument': 1.7.8
-    '@types/node': 24.13.3
+    '@types/node': 26.6.5
 
     '@types/istanbul-lib-coverage': 2.0.6
     '@types/istanbul-lib-report': 3.0.3
@@ -25,8 +25,8 @@ catalogs:
     '@types/istanbul-reports': 3.0.4
 
   testing:
-    vitest: 5.0.1
-    '@vitest/coverage-v8': 5.0.1
+    vitest: 5.0.4
+    '@vitest/coverage-v8': 5.0.4
 
   devScripting:
     enquirer: 2.4.1
@@ -42,18 +42,21 @@ catalogs:
     esbuild: 0.28.2
 
   wdio:
-    webdriverio: 9.31.9
-    expect-webdriverio: 6.0.10
+    webdriverio: 10.0.2
+    expect-webdriverio: 8.0.0
 
-    '@wdio/cli': 9.31.9
-    '@wdio/electron-service': 10.3.0
-    '@wdio/globals': 9.31.3
-    '@wdio/local-runner': 9.31.9
-    '@wdio/mocha-framework': 9.31.9
-    '@wdio/spec-reporter': 9.31.2
+    '@wdio/cli': 10.0.2
+    '@wdio/electron-service': 10.4.0
+    '@wdio/globals': 10.0.2
+    '@wdio/local-runner': 10.0.2
+    '@wdio/mocha-framework': 10.0.1
+    '@wdio/spec-reporter': 10.0.1
 
 allowBuilds:
   edgedriver: false
   electron: false
   esbuild: false
   geckodriver: false
+
+minimumReleaseAgeExclude:
+  - expect-webdriverio@8.0.0
