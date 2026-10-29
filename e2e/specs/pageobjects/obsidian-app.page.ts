@@ -57,7 +57,7 @@ class ObsidianApp {
   }
 
   private async doCreateNewNote(content?: string) {
-    const newNoteButton = $('aria/New note')
+    const newNoteButton = $('.nav-action-button[aria-label="New note"]')
     await newNoteButton.click()
 
     const noteContent = $('.workspace-leaf.mod-active .cm-contentContainer')
