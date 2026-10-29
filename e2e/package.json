@@ -24,6 +24,7 @@
     "istanbul-lib-source-maps": "catalog:devScripting",
     "istanbul-reports": "catalog:devScripting",
     "obsidian": "catalog:types",
-    "webdriverio": "catalog:wdio"
+    "webdriverio": "catalog:wdio",
+    "yauzl": "catalog:wdio"
   }
 }
